@@ -1,0 +1,91 @@
+@{
+    ViewData["Title"] = "Votar";
+    Persona Persona = ViewBag.Persona;
+    Establecimiento Establecimiento = ViewBag.Establecimiento;
+    string estado = Persona.Voto ? "Voto ya registrado" : "Votar";
+}
+
+<div class="cuadro" data-aos="fade-down"
+    data-aos-offset="200"
+    data-aos-delay="200"
+    data-aos-duration="800"
+    data-aos-easing="ease-in-out">
+    <h1 class="display-4">Votar</h1>
+
+    @if (ViewBag.ErrorMessage != null){
+        <div class="alert alert-danger" role="alert">
+            <h4>Error: @ViewBag.ErrorMessage</h4>
+        </div>
+    }
+
+    @if (ViewBag.SuccessMessage != null){
+        <div class="alert alert-success" role="alert">
+            <h4>@ViewBag.SuccessMessage</h4>
+        </div>
+    }
+
+    <form method="POST" action='@Url.Action("Votar", "Home")'>
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <h3>Datos Personales</h3> <hr />
+                <div class="form-group">
+                    <label for="DNI">DNI</label>
+                    <input type="number" class="form-control text-center" name="DNI" readonly value="@Persona.DNI">
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 form-group">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control text-center" name="Nombre" readonly value="@Persona.Nombre">
+                    </div>
+
+                    <div class="col-sm-12 col-lg-6 form-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" class="form-control text-center" name="Apellido" readonly value="@Persona.Apellido">
+                    </div>
+                </div>
+
+                @if(!Persona.Voto){
+                    <div class="form-group">
+                        <label for="NumeroTramite">Numero de tramite</label>
+                        <input type="number" class="form-control text-center" name="NumeroTramite" placeholder="Completa este campo" required>
+                    </div>
+                }
+                @if(Persona.Voto){
+                    <div class="form-group">
+                        <label for="FechaVotacion">Fecha que votó</label>
+                        <input type="datetime" class="form-control text-center" name="FechaVotacion" readonly value="@Persona.FechaVotacion">
+                    </div>
+                }
+            </div>
+
+            <div class="col-sm-12 col-lg-6">
+                <h3>Establecimiento</h3><hr />
+                <input type="hidden" class="form-control text-center" name="IdEstablecimiento" readonly value="@Establecimiento.IdEstablecimiento">
+
+                <div class="form-group">
+                    <label for="NombreEstablecimiento">Nombre del Establecimiento</label>
+                    <input type="text" class="form-control text-center" name="NombreEstablecimiento" readonly value="@Establecimiento.Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="Direccion">Dirección</label>
+                    <input type="text" class="form-control text-center" name="Direccion" readonly value="@Establecimiento.Direccion">
+                </div>
+
+                <div class="form-group">
+                    <label for="Localidad">Localidad</label>
+                    <input type="text" class="form-control text-center" name="Localidad" readonly value="@Establecimiento.Localidad">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a href='@Url.Action("Index", "Home")' class="btn btn-secondary">Consultar otro DNI</a>
+            <button type="submit" class="btn btn-primary" disabled="@Persona.Voto">
+                @estado
+            </button>
+        </div>
+    </form>
+</div>
