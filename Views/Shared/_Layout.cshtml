@@ -10,16 +10,24 @@
 </head>
 <body>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 my-3">
             @RenderBody()
         </main>
     </div>
 
+    <footer class="cuadro footer">
+        <div class="container">
+            <p>&copy; 2021 - Padrón Electoral</p>
+            <p>Por: Tomás Olivera y Iaacob Hambra</p>
+        </div>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script> AOS.init() </script>
+    <script>
+        AOS.init();
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

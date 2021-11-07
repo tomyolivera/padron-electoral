@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/25913e23-b85e-4a94-a2a7-a0c906e0a728/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/padron-electoral",
+    "appService.deploySubpath": "publish"
+}

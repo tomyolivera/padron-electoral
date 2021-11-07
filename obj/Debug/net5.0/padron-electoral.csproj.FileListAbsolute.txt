@@ -47,3 +47,8 @@ C:\xampp\htdocs\files\ORT\tp10\padron-electoral\obj\Debug\net5.0\padron-electora
 C:\xampp\htdocs\files\ORT\tp10\padron-electoral\obj\Debug\net5.0\padron-electoral.genruntimeconfig.cache
 C:\xampp\htdocs\files\ORT\tp10\padron-electoral\bin\Debug\net5.0\reCAPTCHA.MVC.dll
 C:\xampp\htdocs\files\ORT\tp10\padron-electoral\obj\Debug\net5.0\Razor\Views\Home\Reporte.cshtml.g.cs
+C:\xampp\htdocs\files\ORT\tp10\padron-electoral\bin\Debug\net5.0\publish\web.config
+C:\xampp\htdocs\files\ORT\tp10\padron-electoral\bin\Debug\net5.0\publish\appsettings.Development.json
+C:\xampp\htdocs\files\ORT\tp10\padron-electoral\bin\Debug\net5.0\publish\appsettings.json
+C:\xampp\htdocs\files\ORT\tp10\padron-electoral\bin\Debug\net5.0\publish\padron-electoral.deps.json
+C:\xampp\htdocs\files\ORT\tp10\padron-electoral\bin\Debug\net5.0\publish\padron-electoral.runtimeconfig.json
