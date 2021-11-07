@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,8 +14,9 @@ namespace padron_electoral.Controllers
     {
         private string ERR_DNI_NOT_FOUND = "El DNI ingresado no se encuentra en el sistema";
         private string ERR_NTRAMITE_NOT_VALID = "El número de trámite no es correcto";
-        private string ERR_VOTO_REGISTRADO = "El voto ya fue registrado previamente";
+        private string ERR_VOTO_YA_REGISTRADO = "El voto ya fue registrado previamente";
         private string ERR_SISTEMA = "No se pudo completar la acción";
+        private string SUCCESS_VOTO = "Voto realizado correctamente";
 
         public IActionResult Index()
         {
@@ -57,7 +59,7 @@ namespace padron_electoral.Controllers
 
             if(persona.Voto)
             {
-                ViewBag.ErrorMessage = ERR_VOTO_REGISTRADO;
+                ViewBag.ErrorMessage = ERR_VOTO_YA_REGISTRADO;
                 return View();
             }
 
@@ -73,13 +75,13 @@ namespace padron_electoral.Controllers
                 return View();
             }
 
-            ViewBag.SuccessMessage = "Voto realizado correctamente";
+            ViewBag.SuccessMessage = SUCCESS_VOTO;
             return ConsultarPadron(DNI);
         }
 
         public IActionResult Reporte()
         {
-            BD.ObtenerReporte();
+            ViewBag.Reporte = BD.ObtenerReporte();
             return View();
         }
     }

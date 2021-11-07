@@ -15,28 +15,7 @@ namespace padron_electoral.Models
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 var query = "SELECT * FROM Personas WHERE DNI = @DNI";
-                var result = connection.QueryFirstOrDefault(query, new { DNI });
-
-                if(result != null){
-                    if(result.FechaVotacion == null){
-                        persona = new Persona(result.DNI,
-                                              result.Apellido,
-                                              result.Nombre,
-                                              result.NumeroTramite,
-                                              result.IdEstablecimiento,
-                                              result.Voto
-                                            );
-                    }else{
-                        persona = new Persona(result.DNI,
-                                              result.Apellido,
-                                              result.Nombre,
-                                              result.NumeroTramite,
-                                              result.IdEstablecimiento,
-                                              result.Voto,
-                                              result.FechaVotacion
-                                            );
-                    }
-                }
+                persona = connection.QueryFirstOrDefault<Persona>(query, new { DNI });
             }
 
             return persona;
@@ -49,29 +28,28 @@ namespace padron_electoral.Models
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = "SELECT * FROM Establecimiento WHERE IdEstablecimiento = @id";
-                var result = connection.QueryFirstOrDefault(query, new { id });
-
-                if(result != null)
-                    establecimiento = new Establecimiento(result.IdEstablecimiento, result.Nombre, result.Direccion, result.Localidad);
-                
+                establecimiento = connection.QueryFirstOrDefault<Establecimiento>(query, new { id });
             }
 
             return establecimiento;
         }
 
-        public static void ObtenerReporte()
+        public static dynamic ObtenerReporte()
         {
+            dynamic result = null;
+
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = @"   SELECT E.IdEstablecimiento, E.Nombre, P.Nombre, P.Voto
-                                    FROM Personas P
-                                    INNER JOIN Establecimiento E ON E.IdEstablecimiento = P.IdEstablecimiento
-                                    GROUP BY E.IdEstablecimiento, E.Nombre, P.Nombre, P.Voto
-                                    HAVING P.Voto = 1
+                string query = @"   SELECT E.Nombre, COUNT(P.Voto) AS VotosTotales, COUNT(ISNULL(NULL, P.FechaVotacion)) AS VotosRealizados, E.Imagen
+                                    FROM Establecimiento E
+                                    INNER JOIN Personas P ON P.IdEstablecimiento = E.IdEstablecimiento
+                                    GROUP BY E.Nombre, E.Imagen
+                                    HAVING E.Nombre IS NOT NULL AND COUNT(P.Voto) != 0
                                 ";
-                var result = connection.Query(query);
-                Console.WriteLine("Resultado: " + result);
+                result = connection.Query(query);
             }
+
+            return result;
         }
 
         public static bool Votar(int DNI, int IdEstablecimiento)

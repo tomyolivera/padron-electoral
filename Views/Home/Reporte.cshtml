@@ -2,8 +2,34 @@
     ViewData["Title"] = "Reporte";
 }
 
-<div class="cuadro">
-    <h1 class="display-4">Reporte de votantes</h1>
-    
-    
+<div class="cuadro" data-aos="fade-down"
+    data-aos-offset="200"
+    data-aos-delay="200"
+    data-aos-duration="800"
+    data-aos-easing="ease-in-out">
+    <h1 class="display-4">Reporte</h1>
+
+    <div class="row">
+        @foreach (var item in ViewBag.Reporte)
+        {
+            int porcentaje = item.VotosRealizados * 100 / item.VotosTotales;
+
+            <div class="col-md-4 text-dark">
+                <div class="card">
+                    <img class="card-img-top" src="~/img/@item.Imagen" alt="@item.Nombre">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Nombre</h5>
+
+                        <div class="progress">
+                            <div class="progress-bar text-dark bg-warning" role="progressbar" style="width: @porcentaje%">
+                                @item.VotosRealizados de @item.VotosTotales voto/s
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <a href='@Url.Action("Index", "Home")' class="btn btn-secondary">Volver</a>
 </div>

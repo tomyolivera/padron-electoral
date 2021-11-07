@@ -12,26 +12,6 @@ namespace padron_electoral.Models
         private bool _Voto;
         private DateTime _FechaVotacion;
 
-        public Persona(int dni, string apellido, string nombre, int numeroTramite, int idEstablecimiento, bool voto, DateTime fechaVotacion)
-        {
-            _DNI = dni;
-            _Apellido = apellido;
-            _Nombre = nombre;
-            _NumeroTramite = numeroTramite;
-            _IdEstablecimiento = idEstablecimiento;
-            _Voto = voto;
-            _FechaVotacion = fechaVotacion;
-        }
-        public Persona(int dni, string apellido, string nombre, int numeroTramite, int idEstablecimiento, bool voto)
-        {
-            _DNI = dni;
-            _Apellido = apellido;
-            _Nombre = nombre;
-            _NumeroTramite = numeroTramite;
-            _IdEstablecimiento = idEstablecimiento;
-            _Voto = voto;
-        }
-
         public int DNI { get { return _DNI; } set { _DNI = value; } }
         public int IdEstablecimiento { get { return _IdEstablecimiento; } set { _IdEstablecimiento = value; } }
         public string Nombre { get { return _Nombre; } set { _Nombre = value; } }
